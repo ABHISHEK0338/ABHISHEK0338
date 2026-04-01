@@ -1,0 +1,364 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "mount_file_id": "1xIHf8hfK5EZUrwmgJi9TAsVvpEtM9OvW",
+      "authorship_tag": "ABX9TyPqYaeBpeA7Ugp5GXRcWeYM",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ABHISHEK0338/ABHISHEK0338/blob/main/Netflix%20Data_Cleaning%2CAnalysis%20and%20Visualisation\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "idsvgjE11jtQ"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "NETFLIX Data: Cleaning, Analysis, and Visualisation (Beginner ML Project)\n"
+      ],
+      "metadata": {
+        "id": "Rv6Qu_se2G4c"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "import plotly.express as px    ##added by me on colab suggestion\n",
+        "from wordcloud import WordCloud\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "OAsT1n922Yc8"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0a3e4138",
+        "outputId": "aa45c8e0-3184-4243-fe97-c4e26a0ec2ff"
+      },
+      "source": [
+        "import os\n",
+        "print(os.getcwd())"
+      ],
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Step 2: Load the Dataset"
+      ],
+      "metadata": {
+        "id": "8sLy-qFn8BUt"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Load the dataset\n",
+        "data = pd.read_csv('/content/drive/MyDrive/netflix1.csv')"
+      ],
+      "metadata": {
+        "id": "6QIMX5xx2ZPf"
+      },
+      "execution_count": 15,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1d8eb1c1"
+      },
+      "source": [
+        "After uploading, make sure the file `netflix1.csv` is present in the `/content/` directory. If you uploaded a file with a different name, you might need to rename it or adjust the filename in the `pd.read_csv()` call."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Display the first few rows of the dataset\n",
+        "\n",
+        "print(data.head())"
+      ],
+      "metadata": {
+        "id": "4WY0cZve2Zu_",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "6b0782b9-e60c-4d25-81bd-d85ee69907bf"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "  show_id     type                             title         director  \\\n",
+            "0      s1    Movie              Dick Johnson Is Dead  Kirsten Johnson   \n",
+            "1      s3  TV Show                         Ganglands  Julien Leclercq   \n",
+            "2      s6  TV Show                     Midnight Mass    Mike Flanagan   \n",
+            "3     s14    Movie  Confessions of an Invisible Girl    Bruno Garotti   \n",
+            "4      s8    Movie                           Sankofa     Haile Gerima   \n",
+            "\n",
+            "         country date_added  release_year rating  duration  \\\n",
+            "0  United States  9/25/2021          2020  PG-13    90 min   \n",
+            "1         France  9/24/2021          2021  TV-MA  1 Season   \n",
+            "2  United States  9/24/2021          2021  TV-MA  1 Season   \n",
+            "3         Brazil  9/22/2021          2021  TV-PG    91 min   \n",
+            "4  United States  9/24/2021          1993  TV-MA   125 min   \n",
+            "\n",
+            "                                           listed_in  \n",
+            "0                                      Documentaries  \n",
+            "1  Crime TV Shows, International TV Shows, TV Act...  \n",
+            "2                 TV Dramas, TV Horror, TV Mysteries  \n",
+            "3                 Children & Family Movies, Comedies  \n",
+            "4   Dramas, Independent Movies, International Movies  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(data.tail())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "o9ElQx1O8mLs",
+        "outputId": "282d43f2-88ff-4418-b53e-1a519e0af0a2"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "     show_id     type               title   director        country  \\\n",
+            "8785   s8797  TV Show          Yunus Emre  Not Given         Turkey   \n",
+            "8786   s8798  TV Show           Zak Storm  Not Given  United States   \n",
+            "8787   s8801  TV Show  Zindagi Gulzar Hai  Not Given       Pakistan   \n",
+            "8788   s8784  TV Show                Yoko  Not Given       Pakistan   \n",
+            "8789   s8786  TV Show                 YOM  Not Given       Pakistan   \n",
+            "\n",
+            "      date_added  release_year rating   duration  \\\n",
+            "8785   1/17/2017          2016  TV-PG  2 Seasons   \n",
+            "8786   9/13/2018          2016  TV-Y7  3 Seasons   \n",
+            "8787  12/15/2016          2012  TV-PG   1 Season   \n",
+            "8788   6/23/2018          2016   TV-Y   1 Season   \n",
+            "8789    6/7/2018          2016  TV-Y7   1 Season   \n",
+            "\n",
+            "                                              listed_in  \n",
+            "8785                  International TV Shows, TV Dramas  \n",
+            "8786                                           Kids' TV  \n",
+            "8787  International TV Shows, Romantic TV Shows, TV ...  \n",
+            "8788                                           Kids' TV  \n",
+            "8789                                           Kids' TV  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "STEP 3: DATA CLEANING"
+      ],
+      "metadata": {
+        "id": "MvJiySIC8tsi"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Identify and handle missing data, correct data types, and drop duplicates."
+      ],
+      "metadata": {
+        "id": "3ntJwLCl85e8"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# check for missing values\n",
+        "\n",
+        "print(data.isnull().sum())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "rS-u7usx8qYR",
+        "outputId": "cdf82b65-db8e-4698-dc20-02df54b3d195"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "show_id         0\n",
+            "type            0\n",
+            "title           0\n",
+            "director        0\n",
+            "country         0\n",
+            "date_added      0\n",
+            "release_year    0\n",
+            "rating          0\n",
+            "duration        0\n",
+            "listed_in       0\n",
+            "dtype: int64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Drop duplicates if any\n",
+        "\n",
+        "data.drop_duplicates(inplace=True)"
+      ],
+      "metadata": {
+        "id": "zy_IuVsO8zqc"
+      },
+      "execution_count": 22,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Drop rows with missing critical information\n",
+        "data.dropna(subset=['director',  'country'], inplace=True)"
+      ],
+      "metadata": {
+        "id": "e1KdFJdD-Iwr"
+      },
+      "execution_count": 25,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Convert 'date_added' to datetime\n",
+        "\n",
+        "data['data_added'] = pd.to_datetime(data['date_added'])"
+      ],
+      "metadata": {
+        "id": "oRlLSgTj_9JK"
+      },
+      "execution_count": 26,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Show data types to confirm changes\n",
+        "\n",
+        "print(data.dtypes)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CPWhKyebAqAD",
+        "outputId": "6f5a12c1-5295-4797-ad1d-f6ef3df032df"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "show_id                 object\n",
+            "type                    object\n",
+            "title                   object\n",
+            "director                object\n",
+            "country                 object\n",
+            "date_added              object\n",
+            "release_year             int64\n",
+            "rating                  object\n",
+            "duration                object\n",
+            "listed_in               object\n",
+            "data_added      datetime64[ns]\n",
+            "dtype: object\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "STEP 4: EXPLORATORY DATA ANALYSIS"
+      ],
+      "metadata": {
+        "id": "MMLU3WC2A26H"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# A. Content type distribution (Movies vs. TV Shows)\n",
+        "# Count the number of Movies and TV Shows\n",
+        "type_counts = data['type'].value_counts()"
+      ],
+      "metadata": {
+        "id": "OEkR-CvvAzWK"
+      },
+      "execution_count": 32,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "nRQyMWXaBlKX"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
