@@ -7,7 +7,7 @@ I am a detail-oriented Software Engineer with a strong foundation in Data Scienc
 
 ## 🛠️ Tech Stack
 
-* **Languages:** Python, SQL, C++, HTML/CSS
+* **Languages:** Python, SQL, C++, HTML/CSS, JAVA.
 * **AI/ML:** TensorFlow, Keras, OpenCV, Scikit-Learn
 * **Tools & Databases:** Git/GitHub, MySQL, Jupyter Notebooks
 * **Specialties:** Computer Vision, Blockchain Authentication, Deep Learning
