@@ -34,7 +34,6 @@ I am a detail-oriented Software Engineer with a strong foundation in Data Scienc
 ## 📫 Let's Connect!
 * **Email:** mabhisheksingh574@gmail.com
 * **Location:** Hyderabad, India 📍
-* **Portfolio:** [Link to your website or LinkedIn]
 <!--
 **ABHISHEK0338/ABHISHEK0338** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
